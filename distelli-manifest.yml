@@ -20,18 +20,5 @@ walter.gildersleeve/simple-flask-demo:
     - sudo systemctl start docker
   PostInstall:
   Exec:
-    - echo "#################"
     - echo "Exec Starting."
-    - echo DISTELLI_APPHOME == $DISTELLI_APPHOME
-    - echo DISTELLI_INSTALLHOME == $DISTELLI_INSTALLHOME
-    - echo DISTELLI_APPNAME == $DISTELLI_APPNAME
-    - echo DISTELLI_BUILDNUM == $DISTELLI_BUILDNUM
-    - echo DISTELLI_ENV == $DISTELLI_ENV
-    - echo DISTELLI_RELBRANCH == $DISTELLI_RELBRANCH
-    - echo DISTELLI_RELEASE == $DISTELLI_RELEASE
-    - echo DISTELLI_RELREPOTYPE == $DISTELLI_RELREPOTYPE
-    - echo DISTELLI_RELREVISION == $DISTELLI_RELREVISION
-    - echo DISTELLI_RELVERSION == $DISTELLI_RELVERSION
-    - echo "#################"
-    - echo "#################"
-    - sudo docker run -p 80:5000 wmgildersleeve/flask-demo
+    - sudo docker run -p 80:5000 wmgildersleeve/flask-demo:$DISTELLI_BUILDNUM
