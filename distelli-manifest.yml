@@ -3,13 +3,13 @@ walter.gildersleeve/simple-flask-demo:
   Env:
   PreBuild:
   Build:
-    - ### Docker Build Commands ###
+### Docker Build Commands ###
     - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
     - docker build --quiet=false -t "$DISTELLI_DOCKER_REPO" $DISTELLI_DOCKER_PATH
     - echo Pushing to Docker repo "$DISTELLI_DOCKER_REPO"
     - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
     - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
-    - ### End Docker Build Commands ###
+### End Docker Build Commands ###
   PkgInclude:
   PkgExclude:
   PreInstall:
@@ -17,7 +17,7 @@ walter.gildersleeve/simple-flask-demo:
     - sudo yum install -y yum-utils device-mapper-persistent-data lvm2
     - sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
     - sudo yum install docker-ce
-    - # sudo systemctl start docker
+###    - sudo systemctl start docker
   PostInstall:
   Exec:
     - echo "Exec Starting."
