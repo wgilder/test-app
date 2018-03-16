@@ -8,8 +8,10 @@ ADD . /app
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 # Port to deliver Flask results
-EXPOSE 80
+EXPOSE 5000
+
+ENV FLASK_APP=app.py
 
 # Run the Flask app
-CMD ["python", "app.py"]
+CMD ["flask", "run", "--host=0.0.0.0"]
 
