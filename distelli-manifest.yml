@@ -21,4 +21,4 @@ walter.gildersleeve/simple-flask-demo:
   PostInstall:
   Exec:
     - echo "Exec Starting."
-    - exec docker run -p 80:5000 flask_hello_world
+    - sudo docker run -p 80:5000 flask_hello_world
