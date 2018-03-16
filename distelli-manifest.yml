@@ -21,4 +21,5 @@ walter.gildersleeve/simple-flask-demo:
   PostInstall:
   Exec:
     - echo "Exec Starting."
-    - sudo docker run -p 80:5000 wmgildersleeve/flask-demo:$DISTELLI_BUILDNUM
+    - sudo docker kill flask_demo
+    - sudo docker run --name flask_demo --rm -p 80:5000 wmgildersleeve/flask-demo:$DISTELLI_BUILDNUM
