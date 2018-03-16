@@ -3,13 +3,12 @@ walter.gildersleeve/simple-flask-demo:
   Env:
   PreBuild:
   Build:
-### Docker Build Commands ###
+    - echo Build Docker image and push it to the Docker repo
     - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
     - docker build --quiet=false -t "$DISTELLI_DOCKER_REPO" $DISTELLI_DOCKER_PATH
     - echo Pushing to Docker repo "$DISTELLI_DOCKER_REPO"
     - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
     - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
-### End Docker Build Commands ###
   PkgInclude:
   PkgExclude:
   PreInstall:
