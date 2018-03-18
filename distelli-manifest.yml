@@ -3,6 +3,7 @@ walter.gildersleeve/simple-flask-demo:
   Env:
   PreBuild:
   Build:
+# Docker image
     - echo Build Docker image and push it to the Docker repo
     - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
     - docker build --quiet=false -t "$DISTELLI_DOCKER_REPO" $DISTELLI_DOCKER_PATH
@@ -21,4 +22,4 @@ walter.gildersleeve/simple-flask-demo:
   Exec:
     - echo "Exec Starting."
     - echo Attempting to kill extant WS $(sudo docker kill flask_demo)
-    - sudo docker run --rm -p 80:5000 --name flast_demo wmgildersleeve/flask-demo:$DISTELLI_BUILDNUM
+    - sudo docker run --rm -p 80:5000 --name flask_demo wmgildersleeve/flask-demo:$DISTELLI_BUILDNUM
