@@ -1,4 +1,4 @@
-# Puppet Pipelines demo, v2
+# Puppet Pipelines demo, v3
 walter.gildersleeve/simple-flask-demo:
   Env:
   PreBuild:
