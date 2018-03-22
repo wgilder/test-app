@@ -2,6 +2,22 @@
 walter.gildersleeve/simple-flask-demo:
   Env:
   PreBuild:
+    - echo $DISTELLI_APPHOME
+    - echo $DISTELLI_APPNAME
+    - echo $DISTELLI_BUILDNUM
+    - echo $DISTELLI_ENV
+    - echo $DISTELLI_INSTALLHOME
+    - echo $DISTELLI_RELBRANCH
+    - echo $DISTELLI_RELEASE
+    - echo $DISTELLI_RELREPOTYPE
+    - echo $DISTELLI_RELREVISION
+    - echo $DISTELLI_RELVERSION
+    - echo $DISTELLI_DOCKER_USERNAME
+    - echo $DISTELLI_DOCKER_PW
+    - echo $DISTELLI_DOCKER_EMAIL
+    - echo $DISTELLI_DOCKER_ENDPOINT
+    - echo $DISTELLI_DOCKER_REPO
+    - echo $DISTELLI_DOCKER_PATH
   Build:
 # Docker image
     - echo Build Docker image and push it to the Docker repo
