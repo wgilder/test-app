@@ -1,25 +1,35 @@
 # Puppet Pipelines demo, v6
 walter.gildersleeve/simple-flask-demo:
   Env:
+    - FLASK_DEMO_PORT_DEST: "80"
   PreBuild:
   Build:
-# Docker image
-    - echo Build Docker image and push it to the Docker repo
     - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
     - docker build --quiet=false -t "$DISTELLI_DOCKER_REPO" $DISTELLI_DOCKER_PATH
-    - echo Pushing to Docker repo "$DISTELLI_DOCKER_REPO"
     - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
     - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+  AfterBuildSuccess:
+    - echo Build succeeded
+  AfterBuildFailure:
+    - echo Build failed!!
+  PreRelease:
+    - echo In pre-release
   PkgInclude:
   PkgExclude:
   PreInstall:
-#    - echo "Ensuring Docker present"
-#    - sudo yum install -y yum-utils device-mapper-persistent-data lvm2
-#    - sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-#    - sudo yum install -y docker-ce
-#    - sudo systemctl start docker
+    - sudo docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
   PostInstall:
+    - echo In post-install
+  PreStart:
+    - echo In pre-start
   Exec:
-    - echo "Exec Starting."
-    - echo Attempting to kill extant WS $(sudo docker kill flask_demo)
-    - sudo docker run --rm -p 80:5000 --name flask_demo wmgildersleeve/flask-demo:$DISTELLI_BUILDNUM
+### Docker Exec Commands ###
+    - cid=$(uuidgen)
+    - trap 'sudo docker stop $cid' SIGTERM
+    - echo sudo -E docker run --name=$cid -p $FLASK_DEMO_PORT_DEST:80 $DISTELLI_DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" &
+    - sudo -E docker run --name=$cid -p $FLASK_DEMO_PORT_DEST:80 $DISTELLI_DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" &
+    - wait
+    - "true"
+### End Docker Exec Commands ###
+  PreStart:
+    - echo In post-start
