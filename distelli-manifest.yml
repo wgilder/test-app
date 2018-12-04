@@ -1,7 +1,7 @@
 # Puppet Pipelines demo, v6
 walter.gildersleeve/simple-flask-demo:
   Env:
-    - FLASK_DEMO_PORT_DEST: "80"
+    - FLASK_DEMO_PORT_DEST: "8000"
   PreBuild:
   Build:
     - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" $DISTELLI_DOCKER_ENDPOINT
